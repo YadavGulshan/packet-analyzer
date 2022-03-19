@@ -14,3 +14,20 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.dropzone {
+  text-align: center;
+
+  padding: 20px;
+  border: 3px dashed #eeeeee;
+  background-color: #fafafa;
+  color: #bdbdbd;
+  height: 70vh;
+
+  margin-bottom: 20px;
+}
+
+._title1 {
+  text-align: center;
+  padding: 10px;
+}
