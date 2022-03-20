@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import Dropzone from 'react-dropzone';
 
 export const DropFile = () => {
-  const fileTypes = ['Pcom'];
+  const fileTypes = ['Pcap'];
   const [file, setFile] = useState(null);
   const handleDrop = acceptedFiles => {
     setFile(acceptedFiles.map(file => file.name));
