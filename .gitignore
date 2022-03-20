@@ -6,7 +6,7 @@ node_modules
 ### NextJS ###
 # Next build dir
 .next/
-
+*.py
 # End of https://www.toptal.com/developers/gitignore/api/nextjs
 
 
