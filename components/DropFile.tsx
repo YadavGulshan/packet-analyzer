@@ -12,7 +12,7 @@ export const DropFile = () => {
 
   return (
     <div>
-      <h3 className="_title1">Drop Your Pcom File Here</h3>
+      <h3 className="_title1">Drop Your Pcap File Here</h3>
       <Dropzone
         onDrop={handleDrop}
         accept="image/*"
