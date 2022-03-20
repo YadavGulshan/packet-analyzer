@@ -1,8 +1,17 @@
 import { GraphAnalysis } from '../components/Graph/Graph';
 const Graph = () => {
+  const styles = {
+    flex: {
+      display: 'flex',
+      'align-items': 'center',
+      height: '100vh',
+    },
+  };
   return (
     <>
-      <GraphAnalysis />
+      <div style={styles.flex}>
+        <GraphAnalysis />
+      </div>
     </>
   );
 };

@@ -1,75 +1,71 @@
-import React, { useEffect, useRef } from 'react';
-import Chart from 'chart.js/auto';
+import React from 'react';
+import { Bar } from 'react-chartjs-2';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+);
+import '../../styles/graph.module.css';
+const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
 
 export const GraphAnalysis = () => {
-  const canvasEl = useRef(null);
-
-  const colors = {
-    purple: {
-      default: 'rgba(149, 76, 233, 1)',
-      half: 'rgba(149, 76, 233, 0.5)',
-      quarter: 'rgba(149, 76, 233, 0.25)',
-      zero: 'rgba(149, 76, 233, 0)',
-    },
-    indigo: {
-      default: 'rgba(80, 102, 120, 1)',
-      quarter: 'rgba(80, 102, 120, 0.25)',
-    },
+  const data = {
+    labels,
+    datasets: [
+      {
+        label: 'Dataset 1',
+        data: [65, 59, 80, 81, 56, 55, 40],
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+          'rgba(255, 205, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(201, 203, 207, 0.2)',
+        ],
+        borderColor: [
+          'rgb(255, 99, 132)',
+          'rgb(255, 159, 64)',
+          'rgb(255, 205, 86)',
+          'rgb(75, 192, 192)',
+          'rgb(54, 162, 235)',
+          'rgb(153, 102, 255)',
+          'rgb(201, 203, 207)',
+        ],
+        borderWidth: 1,
+      },
+    ],
   };
 
-  useEffect(() => {
-    const ctx = canvasEl.current.getContext('2d');
-    // const ctx = document.getElementById("myChart");
-
-    const gradient = ctx.createLinearGradient(0, 16, 0, 600);
-    gradient.addColorStop(0, colors.purple.half);
-    gradient.addColorStop(0.65, colors.purple.quarter);
-    gradient.addColorStop(1, colors.purple.zero);
-
-    const weight = [60.0, 60.2, 59.1, 61.4, 59.9, 60.2, 59.8, 58.6, 59.6, 59.2];
-
-    const labels = [
-      'Week 1',
-      'Week 2',
-      'Week 3',
-      'Week 4',
-      'Week 5',
-      'Week 6',
-      'Week 7',
-      'Week 8',
-      'Week 9',
-      'Week 10',
-    ];
-    const data = {
-      labels: labels,
-      datasets: [
-        {
-          backgroundColor: gradient,
-          label: 'My First Dataset',
-          data: weight,
-          fill: true,
-          borderWidth: 2,
-          borderColor: colors.purple.default,
-          lineTension: 0.2,
-          pointBackgroundColor: colors.purple.default,
-          pointRadius: 3,
-        },
-      ],
-    };
-
-    const myLineChart = new Chart(ctx, {
-      type: 'line',
-      data: data,
-    });
-
-    return function cleanup() {
-      myLineChart.destroy();
-    };
-  });
+  const options = {
+    plugins: {
+      title: {
+        display: true,
+        text: 'Chart.js Bar Chart - Stacked',
+      },
+    },
+    responsive: true,
+  };
+  const styles = {
+    container: { width: '900px' },
+  };
 
   return (
-    <div className="">
-      <canvas id="myChart" ref={canvasEl} height="100" />
+    <div className="m-auto" style={styles.container}>
+      <Bar options={options} data={data} />
     </div>
   );
 };
