@@ -46,16 +46,35 @@ a {
 .dropzoneIn {
   width: 100%;
   height: 100%;
-  background:rgba(85, 41, 41, 0.5); 
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   cursor: default !important;
-  border: dotted 3px rgb(0, 0, 0);
 }
 
 ._title1 {
   text-align: center;
   padding: 10px;
+}
+
+.dropzoneReject {
+  border: 2px dashed rgb(255, 0, 0);
+  background:rgba(201, 119, 119, 0.5); 
+}.dropzoneAccept {
+  border: 2px dashed rgb(21, 255, 0);
+  background:rgba(157, 209, 98, 0.5); 
+}
+
+
+.label_pcap {
+  height: 3rem;
+  font-size: 1rem;
+  color: black;
+  vertical-align: middle;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0.5rem 0px;
+  text-align:center;
+  border: dotted 3px rgb(0, 0, 0);
 }
