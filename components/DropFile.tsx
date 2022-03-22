@@ -18,7 +18,7 @@ export const DropFile = () => {
       console.log(acceptedFiles[0].name.split('.').pop());
       handleSubmit();
     } else {
-      alert('Hello! I am an alert box!!');
+      alert('Invalid File!');
     }
   };
 
@@ -40,7 +40,7 @@ export const DropFile = () => {
 
   return (
     <div>
-      <h5 className="_title1">Drop Your Pcap File Or Select File</h5>
+      <h5 className="_title1">Upload your PCAP File</h5>
       <ProgressBar
         animated
         className="mb-3"
@@ -126,7 +126,7 @@ export const DropFile = () => {
                 })}
               >
                 {isDragActive && isDragAccept ? (
-                  <p>Drag And Drop Pcap, or click to select files 📂</p>
+                  <p>Drop your PCAP file for Analysis📂</p>
                 ) : (
                   'Wrong File 📂'
                 )}
