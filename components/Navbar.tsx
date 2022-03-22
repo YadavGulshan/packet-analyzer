@@ -13,11 +13,11 @@ import {
 export const NavBar = () => {
   return (
     <div>
-      <Navbar bg="light" expand={false}>
+      <Navbar bg="secondary" expand={false}>
         <Container fluid>
           <Navbar.Toggle aria-controls="offcanvasNavbar" />
           <Navbar.Brand href="#" className="mx-auto middle_title">
-            Navbar Offcanvas
+            Packet Tracer
           </Navbar.Brand>
 
           <Navbar.Offcanvas
@@ -27,7 +27,7 @@ export const NavBar = () => {
           >
             <Offcanvas.Header closeButton>
               <Offcanvas.Title id="offcanvasNavbarLabel">
-                Offcanvas
+                Packet Tracer
               </Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
