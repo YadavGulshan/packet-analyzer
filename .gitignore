@@ -9,7 +9,7 @@ node_modules
 
 *.py
 Test/
-=======
+flaskEnv/
 .vscode/
 # End of https://www.toptal.com/developers/gitignore/api/nextjs
 

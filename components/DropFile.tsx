@@ -4,44 +4,98 @@ import { Fragment } from 'react';
 import { useUploadForm } from './hooks';
 import Dropzone from 'react-dropzone';
 import { ProgressBar, Button, Form } from 'react-bootstrap';
+import { text } from 'stream/consumers';
 export const DropFile = () => {
   const fileTypes = ['Pcap'];
   const [file, setFile] = useState(null);
   const handleDrop = acceptedFiles => {
-    // setFile(acceptedFiles.map(file => file.name));
-    setFile(file => acceptedFiles);
-    handleSubmit();
+    if (acceptedFiles[0].name.split('.').pop() == 'pcap') {
+      // setFile(acceptedFiles.map(file => file.name));
+      setFile(file => acceptedFiles);
+      let labelFileName = document.getElementById('labelFileName');
+      // labelFileName.setAttribute('value' , file)
+      labelFileName.innerHTML = acceptedFiles[0].name;
+      console.log(acceptedFiles[0].name.split('.').pop());
+      handleSubmit();
+    } else {
+      alert('Invalid File!');
+    }
   };
 
-  const { isLoading, isSuccess, uploadForm, progress } = useUploadForm(
-    'http://localhost:5000/post',
-  );
+  const { isLoading, isSuccess, uploadForm, progress } =
+    useUploadForm('/api/file');
 
   const handleSubmit = async () => {
     return await uploadForm(file);
   };
 
+  const handleSubmitEdut = event => {
+    // highlight-range{4}
+    event.preventDefault();
+    let element = document.getElementById('uploadFile');
+    element.click();
+  };
+
+  let fileInput = createRef;
+
   return (
     <div>
-      <h5 className="_title1">Drop Your Pcap File Or Select File</h5>
+      <h5 className="_title1">Upload your PCAP File</h5>
       <ProgressBar
         animated
         className="mb-3"
         now={progress}
         label={`${progress}%`}
       />
-      <Form.Group controlId="formFile" className="mb-3">
-        <Form.Label>Select Pcap File:</Form.Label>
-        <Form.Control onChange={handleDrop} type="file" />
-      </Form.Group>
+      <div className="container">
+        <input
+          id="uploadFile"
+          type="file"
+          accept="application/vnd.tcpdump.pcap"
+          ref={fileInput}
+          onChange={e => handleDrop(e.target.files)}
+          style={{ display: 'none' }}
+        />
+        <div style={{ width: '100%' }} className="row class1">
+          <button
+            className="col-md-4"
+            onClick={handleSubmitEdut}
+            style={{
+              width: '30%',
+              height: '3rem',
+              fontSize: '1rem',
+              color: 'white',
+              backgroundColor: 'purple',
+            }}
+          >
+            Choose Pcap File
+          </button>
+          <label
+            id="labelFileName"
+            className="col-md-auto"
+            style={{
+              height: '3rem',
+              fontSize: '1rem',
+              color: 'black',
+              verticalAlign: 'middle',
+              position: 'relative',
+              width: '70%',
+              padding: '0.5rem 0px',
+              textAlign: 'center',
+              border: 'dotted 3px rgb(0, 0, 0)',
+            }}
+          >
+            Choose Pcap File
+          </label>
+        </div>
+      </div>
       <Dropzone
         noClick
         noKeyboard
-        onDrop={handleDrop}
-        accept="image/*"
-        minSize={1024}
+        onDropAccepted={handleDrop}
+        accept={'application/vnd.tcpdump.pcap'}
+        minSize={0}
         maxSize={3072000}
-        maxFiles={1}
       >
         {({
           getRootProps,
@@ -55,7 +109,7 @@ export const DropFile = () => {
             : isDragReject
             ? 'reject'
             : '';
-          accept: 'file/pcap,file/pcap';
+          accept: 'application/vnd.tcpdump.pcap';
 
           return (
             <div
@@ -67,13 +121,14 @@ export const DropFile = () => {
                 {...getRootProps({
                   className: `${
                     isDragActive ? 'dropzoneIn' : 'dropzoneOut'
-                  } ${additionalClass}`,
+                  } ${additionalClass} ${isDragAccept && 'dropzoneAccept'}
+                  ${isDragReject && 'dropzoneReject'}`,
                 })}
               >
-                {isDragActive ? (
-                  <p>Drag And Drop Pcap, or click to select files 📂</p>
+                {isDragActive && isDragAccept ? (
+                  <p>Drop your PCAP file for Analysis📂</p>
                 ) : (
-                  ''
+                  'Wrong File 📂'
                 )}
               </div>
             </div>
